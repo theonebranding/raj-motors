@@ -73,11 +73,28 @@ export default function ProductModel() {
 
             <div className="grid gap-6 p-5 md:p-8 lg:grid-cols-[1fr_0.32fr]">
               <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-100 shadow-inner">
+                <div className="flex min-h-[320px] flex-col items-center justify-center bg-white p-6 text-center md:hidden">
+                  <FileText className="h-12 w-12 text-brand-700" />
+                  <p className="mt-4 font-display text-2xl font-bold text-slate-950">Open brochure PDF</p>
+                  <p className="mt-3 max-w-md font-body text-sm leading-7 text-slate-600">
+                    Mobile browsers often open PDFs better in a new tab. Use the buttons below.
+                  </p>
+                  <div className="mt-6 flex flex-wrap justify-center gap-3">
+                    <a href={pdfUrl} target="_blank" rel="noreferrer" className="orange-button">
+                      <ExternalLink className="h-4 w-4" />
+                      Open PDF
+                    </a>
+                    <a href={pdfUrl} download className="outline-button">
+                      <Download className="h-4 w-4" />
+                      Download
+                    </a>
+                  </div>
+                </div>
                 <object
                   title={`${model.name} original PDF`}
                   data={`${pdfUrl}#toolbar=1&navpanes=0&view=FitH`}
                   type="application/pdf"
-                  className="h-[72vh] min-h-[640px] w-full bg-white"
+                  className="hidden h-[72vh] min-h-[640px] w-full bg-white md:block"
                 >
                   <div className="flex h-[640px] flex-col items-center justify-center bg-white p-8 text-center">
                     <FileText className="h-12 w-12 text-brand-700" />

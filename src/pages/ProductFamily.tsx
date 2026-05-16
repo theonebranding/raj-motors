@@ -29,6 +29,7 @@ export default function ProductFamily() {
             src={`/slider/${family.slug}.png`}
             alt={`${family.name} vehicle`}
             className="h-full w-full object-cover"
+            loading="lazy"
             onError={(event) => {
               event.currentTarget.onerror = null;
               event.currentTarget.src = `/products/${family.slug}/01.png`;
