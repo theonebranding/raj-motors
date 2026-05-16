@@ -1,16 +1,41 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductImageSlider from '@/components/ProductImageSlider';
 import type { ProductFamily } from '@/data/siteData';
 
 export default function FamilyCard({ family }: { family: ProductFamily }) {
   const Icon = family.icon;
   const featuredModels = family.models.slice(0, 3);
+  const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+  const familyPath = `/products/${family.slug}`;
 
   return (
-    <Link
-      to={`/products/${family.slug}`}
+    <article
       className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-slate-200/90 bg-white shadow-[0_18px_56px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1.5 hover:border-brand-200 hover:shadow-[0_28px_78px_rgba(48,127,226,0.17)]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={(event) => {
+        const target = event.target as Element | null;
+        if (target?.closest('[data-slider-control="true"]')) {
+          return;
+        }
+        navigate(familyPath);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          const target = event.target as Element | null;
+          if (target?.closest('[data-slider-control="true"]')) {
+            return;
+          }
+          event.preventDefault();
+          navigate(familyPath);
+        }
+      }}
+      role="link"
+      tabIndex={0}
+      aria-label={`Open ${family.name}`}
     >
       <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${family.accent}`} />
       <div className="relative h-68 overflow-hidden bg-brand-50">
@@ -19,10 +44,11 @@ export default function FamilyCard({ family }: { family: ProductFamily }) {
           count={family.imageCount}
           alt={`${family.name} product`}
           label={`${family.name} image`}
+          autoPlay={isHovered}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-tata-navy/78 via-tata-navy/22 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.26),transparent_46%)]" />
-        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.26),transparent_46%)]" />
+        <div className="pointer-events-none absolute bottom-4 left-4 right-4 flex items-end justify-between gap-4">
           <div className="grid h-12 w-12 place-items-center rounded-full border border-white/25 bg-white/95 text-brand-700 shadow-[0_14px_35px_rgba(15,23,42,0.22)] backdrop-blur">
             <Icon className="h-6 w-6" />
           </div>
@@ -55,6 +81,6 @@ export default function FamilyCard({ family }: { family: ProductFamily }) {
           ))}
         </div>
       </div>
-    </Link>
+    </article>
   );
 }

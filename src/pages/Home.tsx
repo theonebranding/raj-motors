@@ -5,7 +5,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import ContactForm from '@/components/ContactForm';
 import CTASection from '@/components/CTASection';
 import FamilyCard from '@/components/FamilyCard';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
+import HeroImageSlider from '@/components/HeroImageSlider';
 import ModelCard from '@/components/ModelCard';
 import SEO from '@/components/SEO';
 import SectionHeading from '@/components/SectionHeading';
@@ -41,22 +41,18 @@ export default function Home() {
         description="Raj Motors in Godhra helps buyers explore Tata commercial vehicles, compare models, download brochures, and contact the showroom."
         keywords="Raj Motors Godhra, Tata commercial vehicles Godhra, Tata Ace, Tata Intra, Tata Yodha, Tata Magic, commercial vehicle dealer Godhra"
       />
-      <section className="relative min-h-[calc(100vh-96px)] overflow-hidden bg-tata-navy text-white">
+      <section className="relative min-h-[calc(100vh-96px)] overflow-x-hidden overflow-y-visible bg-tata-navy text-white">
         <div className="absolute inset-0">
-          <img
-            src="/slider/01.png"
+          <HeroImageSlider
             alt="Tata commercial vehicle lineup"
-            className="h-full w-full object-cover"
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = '/slider/hero.png';
-            }}
+            sources={['/slider/tata hero.png', '/slider/tata hero (2).png']}
+            className="h-full w-full"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.5),rgba(15,23,42,0.08)_42%,rgba(15,23,42,0.1))]" />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(15,23,42,0.45),transparent_44%,rgba(15,23,42,0.12))]" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-96px)] max-w-7xl flex-col justify-between px-4 pb-4 pt-8 sm:px-6 sm:pb-5 lg:px-8 lg:pb-8">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-96px)] max-w-7xl flex-col justify-center px-4 pb-10 pt-8 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-md pt-8 sm:pt-12 lg:pt-16"
             initial={{ opacity: 0, y: 24 }}
@@ -71,8 +67,13 @@ export default function Home() {
             </p>
           </motion.div>
 
+        </div>
+      </section>
+
+      <div className="relative z-40 -mt-14 mb-[-3.5rem]">
+        <div className="section-shell">
           <motion.form
-            className="grid gap-3 rounded-2xl border-3 border-black bg-white/95 p-3 text-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.3)] ring-1 ring-slate-950 backdrop-blur md:grid-cols-[1fr_1fr_1fr_auto] md:items-end -mb-12"
+            className="grid gap-3 rounded-2xl border-3 border-black bg-white/95 p-3 text-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.3)] ring-1 ring-slate-950 backdrop-blur md:grid-cols-[1fr_1fr_1fr_auto] md:items-end"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -115,9 +116,9 @@ export default function Home() {
             </button>
           </motion.form>
         </div>
-      </section>
+      </div>
 
-      <AnimatedSection className="bg-white py-24">
+      <AnimatedSection className="bg-white pt-32 pb-24">
         <div className="section-shell">
         <SectionHeading
           eyebrow="Products with us"
@@ -187,8 +188,13 @@ export default function Home() {
             description="A local commercial vehicle destination focused on clear product guidance, direct contact, and practical support after the first enquiry."
           />
           <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch">
-            <div className="overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
-              <ImagePlaceholder label="Showroom or delivery photo" />
+            <div className="overflow-hidden rounded-[2rem] bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
+              <HeroImageSlider
+                alt="Raj Motors hero showcase"
+                sources={['/slider/tata hero.png']}
+                imageClassName="object-cover object-center"
+                className="h-full min-h-[340px]"
+              />
             </div>
             <div className="rounded-[2rem] bg-white p-8 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
               <div className="grid h-14 w-14 place-items-center rounded-full bg-brand-50 text-brand-700">

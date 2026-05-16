@@ -77,3 +77,19 @@ a {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-brand-100 bg-white px-5 py-3 font-display text-sm font-bold text-slate-900 transition hover:border-brand-300 hover:text-brand-700;
   }
 }
+
+@keyframes product-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(14px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.product-slide-enter {
+  animation: product-slide-in 360ms ease-out;
+  will-change: transform, opacity;
+}

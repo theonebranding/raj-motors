@@ -10,18 +10,25 @@ type ProductImageSliderProps = {
   count: number;
   folder: string;
   label?: string;
+  sources?: string[];
   startAt?: number;
 };
 
-export default function ProductImageSlider({ alt, autoPlay = false, className = '', count, folder, label, startAt = 1 }: ProductImageSliderProps) {
-  const sources = useMemo(
-    () =>
-      Array.from({ length: count }, (_, index) => {
+export default function ProductImageSlider({ alt, autoPlay = false, className = '', count, folder, label, sources: customSources, startAt = 1 }: ProductImageSliderProps) {
+  const sources = useMemo(() => {
+    if (customSources && customSources.length > 0) {
+      return customSources;
+    }
+
+    return Array.from({ length: count }, (_, index) => {
         const imageNumber = startAt + index;
+        if (folder === '/products/magic' && imageNumber === 1) {
+          return '/products/magic/01.png';
+        }
         return `${folder}/${String(imageNumber).padStart(2, '0')}.png`;
-      }),
-    [count, folder, startAt],
-  );
+      });
+  }, [count, customSources, folder, startAt]);
+  const sourcesKey = useMemo(() => sources.join('|'), [sources]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [failedSources, setFailedSources] = useState<Set<string>>(() => new Set());
 
@@ -31,7 +38,7 @@ export default function ProductImageSlider({ alt, autoPlay = false, className = 
   useEffect(() => {
     setActiveIndex(0);
     setFailedSources(new Set());
-  }, [folder]);
+  }, [folder, sourcesKey]);
 
   useEffect(() => {
     if (activeIndex >= visibleSources.length && visibleSources.length > 0) {
@@ -84,11 +91,14 @@ export default function ProductImageSlider({ alt, autoPlay = false, className = 
   }
 
   return (
-    <div className={`relative h-full w-full overflow-hidden ${className}`}>
+    <div
+      className={`relative h-full w-full overflow-hidden ${className}`}
+    >
       <img
+        key={activeSource}
         src={activeSource}
         alt={alt}
-        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        className="product-slide-enter h-full w-full object-cover transition duration-500 group-hover:scale-105"
         onError={markFailed}
         loading="lazy"
       />
@@ -101,11 +111,15 @@ export default function ProductImageSlider({ alt, autoPlay = false, className = 
               {activeIndex + 1}/{visibleSources.length}
             </span>
           </div>
-          <div className="absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between opacity-0 transition group-hover:opacity-100">
+          <div className="absolute inset-x-4 top-1/2 z-20 flex -translate-y-1/2 justify-between opacity-100 transition md:opacity-0 md:group-hover:opacity-100">
             <button
               type="button"
               aria-label="Previous image"
+              data-slider-control="true"
               className="grid h-9 w-9 place-items-center rounded-full bg-white/95 text-tata-navy shadow-[0_12px_30px_rgba(15,23,42,0.18)] transition hover:bg-brand-600 hover:text-white"
+              onPointerDown={(event) => {
+                event.stopPropagation();
+              }}
               onClick={goToPrevious}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -113,7 +127,11 @@ export default function ProductImageSlider({ alt, autoPlay = false, className = 
             <button
               type="button"
               aria-label="Next image"
+              data-slider-control="true"
               className="grid h-9 w-9 place-items-center rounded-full bg-white/95 text-tata-navy shadow-[0_12px_30px_rgba(15,23,42,0.18)] transition hover:bg-brand-600 hover:text-white"
+              onPointerDown={(event) => {
+                event.stopPropagation();
+              }}
               onClick={goToNext}
             >
               <ChevronRight className="h-4 w-4" />

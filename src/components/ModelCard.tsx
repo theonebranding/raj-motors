@@ -1,12 +1,19 @@
 import { ArrowRight, Download } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductImageSlider from '@/components/ProductImageSlider';
 import type { ProductModel } from '@/data/siteData';
 import { brochureUrl } from '@/lib/slug';
 
 export default function ModelCard({ familySlug, model }: { familySlug: string; model: ProductModel }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="group relative h-full overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_56px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_24px_72px_rgba(48,127,226,0.15)]">
+    <div
+      className="group relative h-full overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_18px_56px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_24px_72px_rgba(48,127,226,0.15)]"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${model.accent}`} />
       <div className="grid h-full md:grid-cols-[0.42fr_0.58fr]">
         <div className="relative min-h-52 overflow-hidden bg-brand-50 md:min-h-full">
@@ -15,6 +22,7 @@ export default function ModelCard({ familySlug, model }: { familySlug: string; m
             count={model.imageCount}
             alt={`${model.name} product`}
             label={`${model.name} image`}
+            autoPlay={isHovered}
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-tata-navy/55 via-transparent to-transparent md:bg-gradient-to-r" />
           <div className="absolute left-4 top-4 rounded-full border border-white/25 bg-white/95 px-3 py-1 font-display text-xs font-bold uppercase tracking-[0.12em] text-tata-navy shadow-[0_12px_30px_rgba(15,23,42,0.18)]">

@@ -1,7 +1,7 @@
 import { CheckCircle2, MapPin, PhoneCall, Users, Wrench } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import CTASection from '@/components/CTASection';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
+import HeroImageSlider from '@/components/HeroImageSlider';
 import SEO from '@/components/SEO';
 import SectionHeading from '@/components/SectionHeading';
 import { contactDetails } from '@/data/siteData';
@@ -41,8 +41,13 @@ export default function About() {
           />
 
           <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-            <div className="overflow-hidden rounded-[2rem] bg-white p-3 shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
-              <ImagePlaceholder label="Raj Motors showroom image" />
+            <div className="overflow-hidden rounded-[2rem] bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
+              <HeroImageSlider
+                alt="Raj Motors hero showcase"
+                sources={['/slider/tata hero.png']}
+                imageClassName="object-cover object-center"
+                className="h-full min-h-[340px]"
+              />
             </div>
 
             <div className="rounded-[2rem] bg-tata-navy p-8 text-white shadow-[0_24px_80px_rgba(15,23,42,0.18)]">
