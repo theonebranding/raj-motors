@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <Link to="/" className="flex items-center gap-3">
-            <img src="/logo-blue.jpeg" alt="Raj Motors" className="h-12 w-auto" />
+            <img src="/logo raaj-03.png" alt="Raj Motors" className="h-14 w-auto" />
             {/* <div>
               <p className="font-display text-2xl font-extrabold leading-none text-slate-950">Raj Motors</p>
               <p className="mt-1 font-display text-[11px] font-bold uppercase tracking-[0.18em] text-brand-700">Tata commercial vehicles</p>
@@ -102,7 +102,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.4fr_0.85fr_0.85fr_0.9fr_0.9fr] lg:px-8">
           <div>
             <div className="flex items-center gap-3">
-              <img src="/logo-white.jpeg" alt="Raj Motors" className="h-14 w-auto" />
+              <img src="/logo raaj-01.png" alt="Raj Motors" className="h-14 w-auto" />
             </div>
             <p className="mt-5 max-w-xl font-body text-sm leading-7 text-slate-300">
               Commercial vehicle guidance, model downloads, and showroom support for buyers in and around Godhra.
