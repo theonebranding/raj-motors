@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { contactDetails } from '@/data/siteData';
 
 type SEOProps = {
   title: string;
@@ -43,6 +44,19 @@ const setCanonical = (href: string) => {
   element.href = href;
 };
 
+const setJsonLd = (id: string, json: Record<string, unknown>) => {
+  let element = document.querySelector<HTMLScriptElement>(`script#${id}`);
+
+  if (!element) {
+    element = document.createElement('script');
+    element.id = id;
+    element.type = 'application/ld+json';
+    document.head.appendChild(element);
+  }
+
+  element.textContent = JSON.stringify(json);
+};
+
 export default function SEO({ title, description, keywords, image = '/og-image.svg' }: SEOProps) {
   useEffect(() => {
     const fullTitle = `${title} | Raj Motors Godhra`;
@@ -65,6 +79,59 @@ export default function SEO({ title, description, keywords, image = '/og-image.s
     setPropertyMeta('og:url', canonicalUrl);
     setPropertyMeta('og:image', imageUrl);
     setPropertyMeta('og:image:alt', 'Raj Motors Godhra commercial vehicles');
+
+    const localBusinessSchema = {
+      '@context': 'https://schema.org',
+      '@type': ['AutoDealer', 'LocalBusiness', 'AutoRepair'],
+      name: 'Raj Motors',
+      image: 'https://www.rajmotorsgujarat.com/logo%20raaj-03.png',
+      description:
+        'Authorized Tata Motors Light Commercial Vehicle dealer and service center in Godhra, Gujarat. Serving Panchmahal, Dahod, Mahisagar and all Gujarat.',
+      url: 'https://www.rajmotorsgujarat.com/',
+      telephone: contactDetails.phone,
+      priceRange: '₹₹',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: contactDetails.address,
+        addressLocality: 'Godhra',
+        addressRegion: 'Gujarat',
+        postalCode: '389001',
+        addressCountry: 'IN',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '22.7789',
+        longitude: '73.6143',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Godhra' },
+        { '@type': 'City', name: 'Panchmahal' },
+        { '@type': 'City', name: 'Dahod' },
+        { '@type': 'City', name: 'Mahisagar' },
+        { '@type': 'State', name: 'Gujarat' },
+      ],
+      brand: {
+        '@type': 'Brand',
+        name: 'Raj Motors',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Tata LCV Vehicles',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Tata Ace' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Tata Intra' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Tata Yodha' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Product', name: 'Tata Super Ace' } },
+        ],
+      },
+      sameAs: [
+        'https://www.facebook.com/your-page',
+        'https://www.instagram.com/your-handle',
+        'https://www.google.com/maps/place/your-business',
+      ],
+    };
+
+    setJsonLd('raj-motors-local-business-schema', localBusinessSchema);
   }, [description, image, keywords, title]);
 
   return null;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Menu, Phone, X } from 'lucide-react';
+import { Facebook, Instagram, MapPin, MapPinned, Menu, Phone, X } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 import { contactDetails } from '@/data/siteData';
 
@@ -150,6 +150,35 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div>
             <p className="font-display text-sm font-bold uppercase tracking-[0.16em] text-brand-300">Visit</p>
             <p className="mt-4 font-body text-sm leading-7 text-slate-300">{contactDetails.address}</p>
+            <div className="mt-5 flex items-center gap-3 text-slate-300">
+              <a
+                href="https://www.facebook.com/your-page"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-white hover:text-white"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/your-handle"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-white hover:text-white"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.google.com/maps/place/your-business"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Google Business Profile"
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-white hover:text-white"
+              >
+                <MapPinned className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
         <div className="border-t border-white/10 px-4 py-5 text-center font-body text-sm font-medium text-slate-400">
