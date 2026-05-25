@@ -152,7 +152,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <p className="mt-4 font-body text-sm leading-7 text-slate-300">{contactDetails.address}</p>
             <div className="mt-5 flex items-center gap-3 text-slate-300">
               <a
-                href="https://www.facebook.com/your-page"
+                href="https://www.facebook.com/profile.php?id=61589620715285"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
@@ -161,7 +161,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Facebook className="h-4 w-4" />
               </a>
               <a
-                href="https://www.instagram.com/your-handle"
+                href="https://www.instagram.com/rajmotors_godhra/?hl=en"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
@@ -170,7 +170,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href="https://www.google.com/maps/place/your-business"
+                href="https://www.google.com/maps/place/Raj+Motors/@22.7526075,73.6012848,17z"
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Google Business Profile"

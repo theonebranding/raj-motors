@@ -1,5 +1,6 @@
 import { CheckCircle2, MapPin, PhoneCall, Send, ShieldCheck, Truck, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedSection from '@/components/AnimatedSection';
 import ContactForm from '@/components/ContactForm';
@@ -33,44 +34,83 @@ const aboutPoints = ['Commercial vehicle guidance', 'Godhra showroom contact', '
 
 export default function Home() {
   const featuredModels = flatModels.slice(0, 4);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const heroTypingConfig = {
+    headingMsPerChar: 56,
+    subtitleMsPerChar: 28,
+    subtitleStartPauseMs: 180,
+    postTypingBufferMs: 1200,
+  };
+  const heroSlides = [
+    {
+      heading: 'Tata Motors Light Commercial Vehicle Dealer in Godhra | Panchmahal, Dahod, Mahisagar',
+      subtitle: 'Compare Ace, Intra, Yodha, Magic, and EV options with Raj Motors.',
+    },
+    {
+      heading: 'Authorized Tata Motors LCV Dealer & Service Center in Godhra, Gujarat',
+      subtitle: 'Explore practical commercial vehicles with strong mileage, payload options, and trusted local support.',
+    },
+  ] as const;
+  const heroIntervalMs =
+    Math.max(
+      ...heroSlides.map(
+        (slide) =>
+          slide.heading.length * heroTypingConfig.headingMsPerChar +
+          heroTypingConfig.subtitleStartPauseMs +
+          slide.subtitle.length * heroTypingConfig.subtitleMsPerChar,
+      ),
+    ) + heroTypingConfig.postTypingBufferMs;
+  const heroHeading =
+    heroSlides[activeHeroSlide]?.heading ?? heroSlides[0].heading;
+  const heroSubtitle =
+    heroSlides[activeHeroSlide]?.subtitle ?? heroSlides[0].subtitle;
 
   return (
     <>
       <SEO
         title="Raj Motors"
         description="Raj Motors in Godhra helps buyers explore Tata commercial vehicles, compare models, download brochures, and contact the showroom."
-        keywords="Raj Motors Godhra, Tata commercial vehicles Godhra, Tata Ace, Tata Intra, Tata Yodha, Tata Magic, commercial vehicle dealer Godhra"
+        keywords="Tata Motors LCV dealer Godhra, Tata commercial vehicle dealer Godhra, Tata LCV authorized dealer Panchmahal, Tata Motors service center Godhra, Tata LCV dealer Dahod, Tata LCV dealer Mahisagar, Tata Motors dealer Panchmahal district, Light commercial vehicle dealer Gujarat, Tata truck dealer Godhra, Tata Ace dealer Godhra, Tata Intra dealer Panchmahal, Tata Motors authorized service center Gujarat, Tata Motors LCV authorized dealer and service center in Godhra, Best Tata commercial vehicle dealer in Panchmahal, Tata LCV genuine spare parts Godhra, Tata Motors light commercial vehicle price Godhra Gujarat, Tata small commercial vehicle dealer near Dahod, Tata Motors service center near Mahisagar, Vehicle dealer Godhra Gujarat, Commercial vehicle Panchmahal, Tata gaadi dealer Godhra, LCV service center Dahod road, ટાટા મોટર્સ ડીલર ગોધરા, ટાટા LCV ડીલર પંચમહાલ, ટાટા એસ ગોધરા, ટાટા ઇન્ટ્રા ડાહોદ, ટાટા કોમર્શિયલ વ્હીકલ ગુજરાત, ટાટા સર્વિસ સેન્ટર ગોધરા, ટાટા ટ્રક ડીલર મહીસાગર, સસ્તી કિંમત ટાટા ગાડી ગોધરા"
       />
       <section className="relative min-h-[calc(100vh-96px)] overflow-x-hidden overflow-y-visible bg-tata-navy text-white">
         <div className="absolute inset-0">
           <HeroImageSlider
             alt="Tata commercial vehicle lineup"
             sources={['/slider/tata hero.png', '/slider/tata hero (2).png']}
+            intervalMs={heroIntervalMs}
+            onSlideChange={setActiveHeroSlide}
             className="h-full w-full"
           />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.5),rgba(15,23,42,0.08)_42%,rgba(15,23,42,0.1))]" />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(15,23,42,0.45),transparent_44%,rgba(15,23,42,0.12))]" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-96px)] max-w-7xl flex-col justify-center px-4 pb-10 pt-8 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-96px)] max-w-7xl flex-col px-4 pb-24 pt-8 sm:px-6 lg:px-8">
           <motion.div
-            className="max-w-md pt-8 sm:pt-12 lg:pt-16"
+            key={activeHeroSlide}
+            className={`max-w-md pt-8 sm:pt-12 lg:pt-16 ${
+              activeHeroSlide === 0 ? 'self-start' : 'self-start mt-8 text-left sm:mt-12 lg:mt-16'
+            }`}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h1 className="font-display text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
-              Tata commercial vehicles in Godhra.
+            <h1 className="font-display text-3xl font-extrabold leading-tight transition-opacity duration-300 sm:text-4xl lg:text-5xl">
+              {heroHeading}
             </h1>
-            <p className="mt-3 max-w-sm font-body text-sm leading-6 text-slate-100 sm:text-base">
-              Compare Ace, Intra, Yodha, Magic, and EV options with Raj Motors.
+            <p
+              className={`mt-3 font-body text-sm leading-6 text-slate-100 sm:text-base ${
+                activeHeroSlide === 0 ? 'max-w-sm' : 'max-w-md'
+              }`}
+            >
+              {heroSubtitle}
             </p>
           </motion.div>
 
         </div>
       </section>
 
-      <div className="relative z-20 -mt-14 mb-[-3.5rem]">
+      <div className="relative z-20 -mt-8 mb-[-2rem] md:-mt-10 md:mb-[-2.5rem]">
         <div className="section-shell">
           <motion.form
             className="grid gap-3 rounded-2xl border-3 border-black bg-white/95 p-3 text-slate-950 shadow-[0_24px_80px_rgba(15,23,42,0.3)] ring-1 ring-slate-950 backdrop-blur md:grid-cols-[1fr_1fr_1fr_auto] md:items-end"

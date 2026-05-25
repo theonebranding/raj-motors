@@ -65,7 +65,11 @@ export default function SEO({ title, description, keywords, image = '/og-image.s
 
     document.title = fullTitle;
     setMeta('description', description);
-    setMeta('keywords', keywords ?? 'Raj Motors, Tata commercial vehicles, Godhra, commercial vehicles, Ace, Intra, Yodha, Magic, EV');
+    setMeta(
+        'keywords',
+      keywords ??
+        'Tata Motors LCV dealer Godhra, Tata commercial vehicle dealer Godhra, Tata LCV authorized dealer Panchmahal, Tata Motors service center Godhra, Tata LCV dealer Dahod, Tata LCV dealer Mahisagar, Tata Motors dealer Panchmahal district, Light commercial vehicle dealer Gujarat, Tata truck dealer Godhra, Tata Ace dealer Godhra, Tata Intra dealer Panchmahal, Tata Motors authorized service center Gujarat, Tata Motors LCV authorized dealer and service center in Godhra, Best Tata commercial vehicle dealer in Panchmahal, Tata LCV genuine spare parts Godhra, Tata Motors light commercial vehicle price Godhra Gujarat, Tata small commercial vehicle dealer near Dahod, Tata Motors service center near Mahisagar, Vehicle dealer Godhra Gujarat, Commercial vehicle Panchmahal, Tata gaadi dealer Godhra, LCV service center Dahod road, ટાટા મોટર્સ ડીલર ગોધરા, ટાટા LCV ડીલર પંચમહાલ, ટાટા એસ ગોધરા, ટાટા ઇન્ટ્રા ડાહોદ, ટાટા કોમર્શિયલ વ્હીકલ ગુજરાત, ટાટા સર્વિસ સેન્ટર ગોધરા, ટાટા ટ્રક ડીલર મહીસાગર, સસ્તી કિંમત ટાટા ગાડી ગોધરા',
+    );
     setMeta('robots', 'index, follow');
     setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', fullTitle);
@@ -125,9 +129,9 @@ export default function SEO({ title, description, keywords, image = '/og-image.s
         ],
       },
       sameAs: [
-        'https://www.facebook.com/your-page',
-        'https://www.instagram.com/your-handle',
-        'https://www.google.com/maps/place/your-business',
+        'https://www.facebook.com/profile.php?id=61589620715285',
+        'https://www.instagram.com/rajmotors_godhra/?hl=en',
+        'https://www.google.com/maps/place/Raj+Motors/@22.7526075,73.6012848,17z',
       ],
     };
 

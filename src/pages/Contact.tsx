@@ -59,6 +59,18 @@ export default function Contact() {
               </div>
             ))}
           </div>
+          <div className="mt-8 overflow-hidden rounded-2xl border border-brand-100 bg-white">
+            <iframe
+              title="Raj Motors Google Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3679.344111157721!2d73.6012848!3d22.7526075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39609b4d5620d611%3A0x1f0f4b500ecf8c22!2sRaj%20Motors!5e0!3m2!1sen!2sin!4v1779102103499!5m2!1sen!2sin"
+              width="600"
+              height="450"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-[280px] w-full md:h-[340px]"
+            />
+          </div>
         </div>
       </div>
     </AnimatedSection>

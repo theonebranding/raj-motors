@@ -5,16 +5,28 @@ type HeroImageSliderProps = {
   className?: string;
   imageClassName?: string;
   intervalMs?: number;
+  onSlideChange?: (index: number) => void;
   sources: string[];
 };
 
-export default function HeroImageSlider({ alt, className = '', imageClassName = 'object-cover', intervalMs = 4200, sources }: HeroImageSliderProps) {
+export default function HeroImageSlider({
+  alt,
+  className = '',
+  imageClassName = 'object-cover',
+  intervalMs = 4200,
+  onSlideChange,
+  sources,
+}: HeroImageSliderProps) {
   const validSources = useMemo(() => sources.filter(Boolean), [sources]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [validSources.join('|')]);
+
+  useEffect(() => {
+    onSlideChange?.(activeIndex);
+  }, [activeIndex, onSlideChange]);
 
   useEffect(() => {
     if (validSources.length < 2) {
